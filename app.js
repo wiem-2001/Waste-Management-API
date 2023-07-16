@@ -5,24 +5,27 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
+// Create Express app
+const app = express();
+
 // Routes
-// const routes = require('./routes');
+const authRoutes=require('./src/routes/auth');
 
 // Middlewares
-// const middlewares = require('./middlewares');
-
-// Local APIs
-// const localAPIs = require('./localAPIs');
+// const middlewares = require('./middlewares');  
 
 // Config
 dotenv.config();
 
-// Create Express app
-const app = express();
+
 
 // Middleware
 app.use(bodyParser.json());
 app.use(cors());
+
+// local APIs
+app.use('/api', authRoutes);
+
 
 // DATABASE CONNECTION
 mongoose
@@ -43,7 +46,6 @@ mongoose
     console.log(err);
   });
 
-// Routes
-// app.use('/api', routes);
+
 
 module.exports = app;
